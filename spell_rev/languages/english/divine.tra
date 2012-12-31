@@ -173,7 +173,7 @@ Casting Time: 1
 Area of Effect: 5' radius
 Saving Throw: Spell negates
 
-When this spell is cast, a pale glow surrounds and outlines all enemies within the area of effect, making their position and movements easily visible. Outlined creatures do not benefit from the concealment normally provided by darkness, invisibility, or similar effects, and suffer a -2 penalty to AC. Those who succeed at a saving throw vs. spell are totally unaffected by the spell. The light is too dim to have any special effect on undead or dark-dwelling creatures vulnerable to light. The faerie fire does not cause any harm to the objects or creatures thus outlined.~
+When this spell is cast, a pale glow surrounds and outlines all enemies within the area of effect, making their positions and movements easily visible. Outlined creatures do not benefit from the concealment normally provided by darkness, invisibility, or similar effects, and suffer a -2 penalty to AC. Those who succeed at a saving throw vs. spell are totally unaffected by the spell. The light is too dim to have any special effect on undead or dark-dwelling creatures vulnerable to light. The faerie fire does not cause any harm to the objects or creatures thus outlined.~
 @26000=~Faerie Fire
 Level: 1
 School: Evocation
@@ -184,7 +184,7 @@ Casting Time: 1
 Area of Effect: 5' radius
 Saving Throw: None
 
-When this spell is cast, a pale glow surrounds and outlines all creatures within the area of effect, making their position and movements easily visible. Outlined creatures suffer a -2 penalty to AC for the duration of the spell. The light is too dim to have any special effect on undead or dark-dwelling creatures vulnerable to light. The faerie fire does not cause any harm to the objects or creatures thus outlined.~
+When this spell is cast, a pale glow surrounds and outlines all creatures within the area of effect, making their positions and movements easily visible. Outlined creatures suffer a -2 penalty to AC for the duration of the spell. The light is too dim to have any special effect on undead or dark-dwelling creatures vulnerable to light. The faerie fire does not cause any harm to the objects or creatures thus outlined.~
 
 @27=~Strength of Stone~
 @28=~Strength of Stone

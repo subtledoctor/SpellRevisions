@@ -1,0 +1,22 @@
+DEFINE_ACTION_FUNCTION ~FIX_SPELL_IDS~ BEGIN
+  COPY_EXISTING ~spell.ids~ ~override~
+    REPLACE_TEXTUALLY ~%WNL%~ ~%LNL%~
+    REPLACE_TEXTUALLY ~%MNL%~ ~%LNL%~
+    INSERT_BYTES 0 1
+    WRITE_ASCIIE 0 ~%LNL%~ #1
+    REPLACE_EVALUATE ~%LNL%\([12]\)\([1-9][0-9][0-9]\)[ %TAB%]+\(.+\)~ BEGIN
+      TEXT_SPRINT result ~%LNL%%MATCH1%%MATCH2% %MATCH3%~
+      PATCH_IF (MATCH1 == 1) BEGIN
+        TEXT_SPRINT resource ~sppr~
+      END
+      ELSE BEGIN
+        TEXT_SPRINT resource ~spwi~
+      END
+      TEXT_SPRINT resource ~%resource%%MATCH2%~
+      PATCH_IF (NOT FILE_EXISTS_IN_GAME ~%resource%.spl~) BEGIN
+        TEXT_SPRINT result ~~
+      END
+    END ~%result%~
+    REPLACE_TEXTUALLY ~%LNL%+~ ~%WNL%~
+    BUT_ONLY
+END

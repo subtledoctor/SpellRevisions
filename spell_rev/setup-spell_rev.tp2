@@ -45,7 +45,25 @@ BEGIN @9996
 DESIGNATED 0
 REQUIRE_PREDICATE (ENGINE_IS ~soa tob~) @8996 // ~This mod is designed for the Baldur's Gate II engine and will not function on other games.~
 
+/* ----Utility---- */
+
 INCLUDE ~spell_rev/shared/cre_spell_immunity.tph~ // function used to make creatures immune to certain spells
+INCLUDE ~spell_rev/shared/disable_spells.tph~ // macros to deal with disabling and hiding spells
+INCLUDE ~spell_rev/shared/fix_spell_ids.tph~ // function that removes unused entries from spell.ids so ADD_SPELL will be more efficient
+
+// empty file
+<<<<<<<< .../spell_rev-inlined/null.file
+>>>>>>>>
+
+LAUNCH_ACTION_FUNCTION ~FIX_SPELL_IDS~ END // fix spell.ids
+
+// initialize mod spell list
+ACTION_IF (NOT FILE_EXISTS_IN_GAME ~mod_spells.2da~) BEGIN
+  COPY ~.../spell_rev-inlined/null.file~ ~override/mod_spells.2da~
+  APPEND ~mod_spells.2da~ ~2DA V1.0~
+  APPEND ~mod_spells.2da~ ~0~
+  APPEND ~mod_spells.2da~ ~COMPONENT IDENTIFIER SPELL TYPE LEVEL SPHERES RESTRICTIONS SCROLL~
+END
 
 /* ----Various---- */
 
@@ -313,17 +331,64 @@ COPY ~spell_rev/sppr1##/sppr113.spl~     ~override~  // Doom
   SAY NAME1 @23    SAY UNIDENTIFIED_DESC @24
 
 ADD_PROJECTILE ~spell_rev/projectles/dvffire.pro~
-COPY ~spell_rev/sppr1##/sppr114.spl~     ~override~  // Faerie Fire (new druid spell)
+ADD_SPELL ~spell_rev/sppr1##/dvffire.spl~ 1 1 CLERIC_FAERIE_FIRE // Faerie Fire (new druid spell)
   SAY NAME1 @25    SAY UNIDENTIFIED_DESC @26
   WRITE_SHORT 0x98 dvffire
-COPY ~spell_rev/sppr1##/sppr114f.spl~     ~override~
-COPY ~spell_rev/sppr1##/sppr114b.bam~     ~override~
-COPY ~spell_rev/sppr1##/sppr114c.bam~     ~override~
-
+  PATCH_FOR_EACH spell IN spwi224d dvffiref BEGIN
+    LAUNCH_PATCH_FUNCTION ~ADD_SPELL_EFFECT~
+      INT_VAR
+        opcode = 206       // protection from spell
+        target = 2         // preset target
+        power = 1
+        duration = 23
+        resist_dispel = 2  // not dispel/bypass resistance
+        savingthrow = BIT0 // save vs. spell
+      STR_VAR
+        resource = EVAL ~%spell%~
+    END
+  END
+  LAUNCH_PATCH_FUNCTION ~ADD_SPELL_EFFECT~
+    INT_VAR
+      opcode = 146       // cast spell
+      parameter2 = 1     // cast instantly
+      target = 2         // preset target
+      power = 1
+      timing = 4         // delay
+      duration = 24
+      resist_dispel = 2  // not dispel/bypass resistance
+      savingthrow = BIT0 // save vs. spell
+    STR_VAR
+      resource = ~dvffiref~
+  END
+  ON_DISABLE
+    LAUNCH_PATCH_MACRO ~SPELL_ON_DISABLE~
+  END
+OUTER_PATCH_SAVE CLERIC_FAERIE_FIRE ~%CLERIC_FAERIE_FIRE%~ BEGIN // variable contains new resource name of the spell
+  REPLACE_TEXTUALLY ~^1~ ~SPPR~
+END
+COPY ~spell_rev/sppr1##/dvffiref.spl~     ~override~
+COPY ~spell_rev/sppr1##/dvffireb.bam~     ~override~
+COPY ~spell_rev/sppr1##/dvffirec.bam~     ~override~
+APPEND ~mod_spells.2da~ ~%TP2_BASE_NAME% %COMPONENT_NUMBER% CLERIC_FAERIE_FIRE %CLERIC_FAERIE_FIRE% DIVINE 1 WE **** ****~ // store info for mod compatibility
 // uncomment the lines below to allow those affected by Faerie Fire to turn invisible
-//COPY ~spell_rev/sppr1##/nerfed_sppr114.spl~     ~override/sppr114.spl~  // Faerie Fire (new druid spell)
-//  SAY NAME1 @25    SAY UNIDENTIFIED_DESC @26000
-//  WRITE_SHORT 0x98 dvffire
+//COPY_EXISTING ~%CLERIC_FAERIE_FIRE%.spl~ ~override~
+//  SAY UNIDENTIFIED_DESC @26000
+//  PATCH_FOR_EACH opcode IN 101 309 206 146 BEGIN
+//    LAUNCH_PATCH_FUNCTION ~DELETE_SPELL_EFFECT~
+//      INT_VAR
+//        opcode_to_delete = opcode
+//    END
+//  END
+//  READ_LONG 0x64 abilities_off
+//  READ_SHORT 0x68 num_abilities
+//  READ_LONG 0x6a effects_off
+//  FOR (i = 0; i < num_abilities; i += 1) BEGIN
+//    READ_SHORT (abilities_off + 0x28 * i + 0x1e) num_features
+//    READ_SHORT (abilities_off + 0x28 * i + 0x20) features_ind
+//    FOR (j = 0; j < num_features; j += 1) BEGIN
+//      WRITE_LONG (effects_off + 0x30 * (j + features_ind) + 0x24) 0 // no saving throw
+//    END
+//  END
 
 COPY ~spell_rev/sppr1##/sppr115.spl~     ~override~  // Strength of Stone (new druid spell)
   SAY NAME1 @27    SAY UNIDENTIFIED_DESC @28
@@ -1360,6 +1425,19 @@ ADD_PROJECTILE ~spell_rev/projectles/dvgldust.pro~
 COPY ~spell_rev/spwi2##/spwi224.spl~     ~override~  // Glitterdust
   SAY NAME1 @493    SAY UNIDENTIFIED_DESC @494
   WRITE_SHORT 0x98 dvgldust
+  PATCH_IF (VARIABLE_IS_SET CLERIC_FAERIE_FIRE) BEGIN // if Faerie Fire is installed
+    LAUNCH_PATCH_FUNCTION ~ADD_SPELL_EFFECT~
+      INT_VAR
+        opcode = 206       // protection from spell
+        target = 2         // preset target
+        power = 1
+        duration = 23
+        resist_dispel = 2  // not dispel/bypass resistance
+        savingthrow = BIT1 // save vs. breath
+      STR_VAR
+        resource = ~dvffiref~
+    END
+  END
 COPY ~spell_rev/spwi2##/scrla3.itm~     ~override~
   SAY NAME2 @493    SAY IDENTIFIED_DESC   @494
 COPY ~spell_rev/spwi2##/spwi224d.spl~     ~override~
@@ -1398,7 +1476,6 @@ COPY ~spell_rev/spwi3##/spwi303c.spl~     ~override~
 COPY ~spell_rev/spwi3##/spwi303d.spl~     ~override~
   WRITE_SHORT 0x98 dvfarrow
 COPY ~spell_rev/spwi3##/spwi303e.spl~     ~override~
-
 ACTION_IF (FILE_EXISTS_IN_GAME ~cut01b.bcs~) BEGIN
   COPY_EXISTING ~cut01b.bcs~ ~override~ // prevent Flame Arrow from hurting player characters during a cutscene
     DECOMPILE_BCS_TO_BAF
@@ -2467,6 +2544,9 @@ COPY ~spell_rev/spwi9##/dw#plane.spl~     ~override~  // SCSII Dark Planetar
 COPY ~spell_rev/spwi9##/spwi925.spl~     ~override~  // Comet
   SAY NAME1 @861    SAY UNIDENTIFIED_DESC @862
 
+// clean up mod_spells.2da
+COPY_EXISTING ~mod_spells.2da~ ~override~
+  PRETTY_PRINT_2DA
 
 /*---------------------Tutu Scrolls---------------------*/
 

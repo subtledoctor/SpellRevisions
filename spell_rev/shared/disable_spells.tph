@@ -25,7 +25,7 @@ DEFINE_ACTION_MACRO ~WRITE_HIDESPL~ BEGIN
         COPY_EXISTING ~hidespl.2da~ ~override~
           REPLACE_TEXTUALLY ~%WNL%~ ~%LNL%~
           REPLACE_TEXTUALLY ~%MNL%~ ~%LNL%~
-          REPLACE_TEXTUALLY ~%LNL%[ %TAB%]*%mi_spell%[ %TAB%].+~
+          REPLACE_TEXTUALLY ~%LNL%[ %TAB%]*%mi_spell%[ %TAB%].+~ ~~
           REPLACE_TEXTUALLY ~%LNL%~ ~%WNL%~
           BUT_ONLY
       END
@@ -40,7 +40,7 @@ DEFINE_ACTION_MACRO ~WRITE_HIDESPL~ BEGIN
         COPY ~spell_rev/shared/hidespl.2da~ ~spell_rev/shared~
           REPLACE_TEXTUALLY ~%WNL%~ ~%LNL%~
           REPLACE_TEXTUALLY ~%MNL%~ ~%LNL%~
-          REPLACE_TEXTUALLY ~%LNL%[ %TAB%]*%mi_spell%[ %TAB%].+~
+          REPLACE_TEXTUALLY ~%LNL%[ %TAB%]*%mi_spell%[ %TAB%].+~ ~~
           REPLACE_TEXTUALLY ~%LNL%~ ~%WNL%~
           BUT_ONLY
       END
