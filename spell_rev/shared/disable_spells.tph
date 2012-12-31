@@ -1,0 +1,52 @@
+DEFINE_PATCH_MACRO ~HIDE_SPELL~ BEGIN
+  SET $hidespl(~%SOURCE_RES%~) = 1
+END
+
+DEFINE_PATCH_MACRO ~UNHIDE_SPELL~ BEGIN
+  SET $hidespl(~%SOURCE_RES%~) = 0
+END
+
+DEFINE_PATCH_MACRO ~SPELL_ON_DISABLE~ BEGIN
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+    READ_SHORT 0x1c mi_spell_type
+    PATCH_IF (mi_spell_type == 2) BEGIN // divine
+      WRITE_LONG 0x1e (LONG_AT 0x1e | BIT30 | BIT31) // make unusable by cleric/paladin and druid/ranger
+    END
+    ELSE PATCH_IF (mi_spell_type == 1) BEGIN // arcane
+      LAUNCH_PATCH_MACRO ~HIDE_SPELL~
+    END
+  END
+END
+
+DEFINE_ACTION_MACRO ~WRITE_HIDESPL~ BEGIN
+  ACTION_IF (FILE_EXISTS_IN_GAME ~hidespl.2da~) BEGIN // hidespl component already installed
+    ACTION_PHP_EACH hidespl AS mi_spell => mi_hide BEGIN
+      ACTION_IF (mi_hide == 0) BEGIN
+        COPY_EXISTING ~hidespl.2da~ ~override~
+          REPLACE_TEXTUALLY ~%WNL%~ ~%LNL%~
+          REPLACE_TEXTUALLY ~%MNL%~ ~%LNL%~
+          REPLACE_TEXTUALLY ~%LNL%[ %TAB%]*%mi_spell%[ %TAB%].+~
+          REPLACE_TEXTUALLY ~%LNL%~ ~%WNL%~
+          BUT_ONLY
+      END
+      ELSE ACTION_IF (mi_hide == 1) BEGIN
+        APPEND ~hidespl.2da~ ~%mi_spell% 1~
+      END
+    END
+  END
+  ELSE BEGIN // hidespl component not installed
+    ACTION_PHP_EACH hidespl AS mi_spell => mi_hide BEGIN
+      ACTION_IF (mi_hide == 0) BEGIN
+        COPY ~spell_rev/shared/hidespl.2da~ ~spell_rev/shared~
+          REPLACE_TEXTUALLY ~%WNL%~ ~%LNL%~
+          REPLACE_TEXTUALLY ~%MNL%~ ~%LNL%~
+          REPLACE_TEXTUALLY ~%LNL%[ %TAB%]*%mi_spell%[ %TAB%].+~
+          REPLACE_TEXTUALLY ~%LNL%~ ~%WNL%~
+          BUT_ONLY
+      END
+      ELSE ACTION_IF (mi_hide == 1) BEGIN
+        APPEND_OUTER ~spell_rev/shared/hidespl.2da~ ~%mi_spell% 1~
+      END
+    END
+  END
+END
