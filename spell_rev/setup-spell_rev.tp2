@@ -1652,6 +1652,7 @@ COPY ~spell_rev/spwi4##/spwi406.spl~     ~override~  // Minor Globe of Invulnera
   PATCH_IF (VARIABLE_IS_SET CLERIC_STRENGTH_OF_STONE) BEGIN // if Strength of Stone is installed
     // add Protection From Spell: Strength of Stone effect to each header
     // calculate duration for each header
+    READ_LONG 0x34 power
     READ_LONG 0x64 abilities_off
     READ_SHORT 0x68 num_abilities
     READ_LONG 0x6a effects_off
@@ -1673,7 +1674,7 @@ COPY ~spell_rev/spwi4##/spwi406.spl~     ~override~  // Minor Globe of Invulnera
         INT_VAR
           opcode = 206       // protection from spell
           target = 1         // self
-          power = 4
+          power              // match level
           duration           // duration calculated for this header
           resist_dispel = 3  // dispel/bypass resistance
           header             // add only to this header
@@ -2012,6 +2013,7 @@ COPY ~spell_rev/spwi6##/spwi602.spl~     ~override~  // Globe of Invulnerability
   PATCH_IF (VARIABLE_IS_SET CLERIC_STRENGTH_OF_STONE) BEGIN // if Strength of Stone is installed
     // add Protection From Spell: Strength of Stone effect to each header
     // calculate duration for each header
+    READ_LONG 0x34 power
     READ_LONG 0x64 abilities_off
     READ_SHORT 0x68 num_abilities
     READ_LONG 0x6a effects_off
@@ -2033,7 +2035,7 @@ COPY ~spell_rev/spwi6##/spwi602.spl~     ~override~  // Globe of Invulnerability
         INT_VAR
           opcode = 206       // protection from spell
           target = 1         // self
-          power = 6
+          power              // match level
           duration           // duration calculated for this header
           resist_dispel = 3  // dispel/bypass resistance
           header             // add only to this header
@@ -2362,6 +2364,7 @@ COPY ~spell_rev/spwi8##/spwi802.spl~     ~override~  // Spell Shield (moved from
   PATCH_IF (VARIABLE_IS_SET CLERIC_STRENGTH_OF_STONE) BEGIN // if Strength of Stone is installed
     // add Protection From Spell: Strength of Stone effect to each header
     // calculate duration for each header
+    READ_LONG 0x34 power
     READ_LONG 0x64 abilities_off
     READ_SHORT 0x68 num_abilities
     READ_LONG 0x6a effects_off
@@ -2383,7 +2386,7 @@ COPY ~spell_rev/spwi8##/spwi802.spl~     ~override~  // Spell Shield (moved from
         INT_VAR
           opcode = 206       // protection from spell
           target = 1         // self
-          power = 8
+          power              // match level
           duration           // duration calculated for this header
           resist_dispel = 3  // dispel/bypass resistance
           header             // add only to this header
