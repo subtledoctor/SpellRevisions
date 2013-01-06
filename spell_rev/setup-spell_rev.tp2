@@ -33,7 +33,6 @@ LANGUAGE ~French~ ~languages/english~
                    ~spell_rev/languages/french/divine.tra~
                    ~spell_rev/languages/french/setup.tra~
 
-
 //\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\\\
 ////\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
 //\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\\\
@@ -2790,15 +2789,12 @@ DEFINE_PATCH_MACRO ~PLANETAR_ANIMATION~ BEGIN
       armor_colour = 105
       hair_colour = 25
       battle_cry1_strref = 61729
-      battle_cry2_strref = (0 - 1)
       damage_strref = 61730
       dying_strref = 61731
       hurt_strref = 61732
       select_common1_strref = 61724
       select_common2_strref = 61725
       select_common3_strref = 61726
-    STR_VAR
-      armour = ~~
   END
 END
 
@@ -2818,10 +2814,7 @@ DEFINE_PATCH_MACRO ~DARK_PLANETAR_ANIMATION~ BEGIN
       battle_cry2_strref = 61761
       damage_strref = 55381
       dying_strref = 55382
-      hurt_strref = (0 - 1)
       select_common1_strref = 61759
-      select_common2_strref = (0 - 1)
-      select_common3_strref = (0 - 1)
     STR_VAR
       armour = ~dvplanea~
   END
@@ -2840,7 +2833,6 @@ DEFINE_PATCH_MACRO ~DEVA_ANIMATION~ BEGIN
       armor_colour = 105
       hair_colour = 17
       battle_cry1_strref = 61729
-      battle_cry2_strref = (0 - 1)
       damage_strref = 61730
       dying_strref = 61731
       hurt_strref = 61732
@@ -2868,10 +2860,7 @@ DEFINE_PATCH_MACRO ~FALLEN_DEVA_ANIMATION~ BEGIN
       battle_cry2_strref = 61761
       damage_strref = 55381
       dying_strref = 55382
-      hurt_strref = (0 - 1)
       select_common1_strref = 61759
-      select_common2_strref = (0 - 1)
-      select_common3_strref = (0 - 1)
     STR_VAR
       armour = ~dvdevaea~
   END
@@ -2879,15 +2868,15 @@ END
 
 // copy over items for wings, weapons, and armour
 COPY ~spell_rev/shared/wings~ ~override~
-ACTION_IF (NOT MOD_IS_INSTALLED ~setup-spell_rev.tp2~ 0) BEGIN
-  COPY ~spell_rev/spwi9##/dvplanga.itm~ ~override~
-  COPY ~spell_rev/spwi9##/dvplangw.itm~ ~override~
-  COPY ~spell_rev/spwi9##/dvplanea.itm~ ~override~
-  COPY ~spell_rev/spwi9##/dvplanew.itm~ ~override~
-  COPY ~spell_rev/sppr7##/dvdevaga.itm~ ~override~
-  COPY ~spell_rev/sppr7##/dvdevagw.itm~ ~override~
-  COPY ~spell_rev/sppr7##/dvdevaea.itm~ ~override~
-  COPY ~spell_rev/sppr7##/dvdevaew.itm~ ~override~
+ACTION_FOR_EACH item IN dvplanga dvplangw dvplanea dvplanew BEGIN
+  ACTION_IF (NOT FILE_EXISTS_IN_GAME ~%item%.itm~) BEGIN
+    COPY ~spell_rev/spwi9##/%item%.itm~ ~override~
+  END
+END
+ACTION_FOR_EACH item IN dvdevaga dvdevagw dvdevaea dvdevaew BEGIN
+  ACTION_IF (NOT FILE_EXISTS_IN_GAME ~%item%.itm~) BEGIN
+    COPY ~spell_rev/sppr7##/%item%.itm~ ~override~
+  END
 END
 
 // patch weapons to use real animations
