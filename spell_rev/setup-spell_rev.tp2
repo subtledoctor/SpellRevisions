@@ -127,8 +127,6 @@ COPY ~spell_rev/shared/dvinvis.spl~      ~override~  // Invisibility
 COPY ~spell_rev/shared/spwi977.spl~      ~override~  // Shapeshift Natural Form
 COPY ~spell_rev/shared/spwi978.spl~      ~override~  // Shapeshift Natural Form
 
-COPY ~spell_rev/shared/wings~      ~override~  // 1PP attachable wings
-
 COPY ~spell_rev/shared/unddeath.eff~     ~override~ // Variant undead death effect
 
 /* ----Projectiles---- */
