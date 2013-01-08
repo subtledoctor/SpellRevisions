@@ -394,7 +394,7 @@ OUTER_PATCH_SAVE CLERIC_STRENGTH_OF_STONE ~%CLERIC_STRENGTH_OF_STONE%~ BEGIN // 
 END
 APPEND ~mod_spells.2da~ ~%TP2_BASE_NAME% %COMPONENT_NUMBER% CLERIC_STRENGTH_OF_STONE %CLERIC_STRENGTH_OF_STONE% DIVINE 1 EE **** ****~ // store info for mod compatibility
 
-COPY ~spell_rev/sppr1##/sppr116.spl~     ~override~  // Sunscorch (new druid spell)
+COPY ~spell_rev/sppr1##/dvsuns.spl~     ~override/sppr116.spl~  // Sunscorch (new druid spell)
   SAY NAME1 @29    SAY UNIDENTIFIED_DESC @30
 COPY ~spell_rev/sppr1##/dvsuns1.eff~     ~override~
 COPY ~spell_rev/sppr1##/dvsuns2.eff~     ~override~
@@ -406,9 +406,9 @@ COPY ~spell_rev/sppr1##/dvsuns7.eff~     ~override~
 COPY ~spell_rev/sppr1##/dvsuns8.eff~     ~override~
 COPY ~spell_rev/sppr1##/dvsuns9.eff~     ~override~
 COPY ~spell_rev/sppr1##/dvsuns10.eff~     ~override~
-COPY ~spell_rev/sppr1##/sppr116a.bam~     ~override~
-COPY ~spell_rev/sppr1##/sppr116b.bam~     ~override~
-COPY ~spell_rev/sppr1##/sppr116c.bam~     ~override~
+COPY ~spell_rev/sppr1##/dvsunsa.bam~     ~override~
+COPY ~spell_rev/sppr1##/dvsunsb.bam~     ~override~
+COPY ~spell_rev/sppr1##/dvsunsc.bam~     ~override~
 
 
 /*--------------------level 2----------------------*/
