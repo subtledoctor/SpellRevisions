@@ -630,7 +630,7 @@ Casting Time: 3
 Area of Effect: Special
 Saving Throw: Breath half
 
-This spell enables the caster to hurl flaming arrows at his enemies. The caster receives one arrow for every two experience levels (up to a maximum of five arrows at level 10), and each arrow inflicts 1d6 points of missile damage plus 2d6 points of fire damage. Only half of the fire damage is inflicted if the creature struck saves vs. breath at -2. Upon completion of the spell, the first arrow will streak towards the creature targeted by the wizard, while additional arrows will randomly target opponents within range.~
+This spell enables the caster to hurl flaming arrows at his enemies. The caster receives one arrow for every two experience levels (up to a maximum of five arrows at level 10), and each arrow inflicts 1d6 points of missile damage plus 1d6 points of fire damage. Upon completion of the spell, the first arrow will streak towards the creature targeted by the wizard, while additional arrows will randomly target opponents within range.~
 
 @507=~Fireball~
 @508=~Fireball
@@ -649,12 +649,12 @@ A fireball is an explosive burst of flame that detonates with a low roar, delive
 Level: 3
 School: Alteration
 Range: Medium
-Duration: 1 turn
+Duration: 1 turn + 1 round/level
 Casting Time: 3
 Area of Effect: 1 creature
 Saving Throw: None
 
-When this spell is cast, the affected creature functions at double normal movement rate, gains a +2 bonus to attack rolls, armor class, and saving throws vs. breath, and can make an extra attack each round. Spellcasting and spell effects are not affected. Haste negates and counters the effects of a Slow spell. When the spell ends, affected creatures become winded for 3 rounds. While winded they receive penalties of -2 to hit, damage, and armor class. This spell is not cumulative with itself or with other similar magic.~
+When this spell is cast, the affected creatures gain +6 to movement rate and can make an extra half attack each round. Spellcasting and spell effects are not affected. Haste negates and counters the effects of a Slow spell. When the spell ends, affected creatures become winded for 3 rounds. While winded they receive penalties of -2 to hit, damage, and armor class. This spell is not cumulative with itself or with other similar magic.~
 
 @511=~Hold Person~
 @512=~Hold Person
@@ -722,8 +722,8 @@ HP 36, AC 5, THAC0 16, Saving Throws 9/13/12/15/14
 1 Attack Per Round, 1d8+1 Slashing Damage (Long Sword +1)
 
 Memorized Spells:
-1° Armor of Faith, Bless, Cure Light Wounds (x2), Resist Fear
-2° Chant, Hold Person, Silence~
+1Â° Armor of Faith, Bless, Cure Light Wounds (x2), Resist Fear
+2Â° Chant, Hold Person, Silence~
 
 @519=~Non-Detection~
 @520=~Non-Detection
@@ -1085,7 +1085,7 @@ Casting Time: 4
 Area of Effect: 30' radius
 Saving Throw: None
 
-The spell allows the caster to adversely affect the saving throws of his enemies. The effect is applied to all hostile creatures within the area of effect. Those under the influence of this spell make all their saving throws at a penalty of -2. Multiple castings of this spell are not cumulative.~
+The spell allows the caster to adversely affect the saving throws of his enemies. The effect is applied to all hostile creatures within the area of effect. Those under the influence of this spell make all their saving throws at a penalty of -2, and take an extra point of spell damage for each die rolled. Multiple castings of this spell are not cumulative.~
 
 @585=~Otiluke's Resilient Sphere~
 @586=~Otiluke's Resilient Sphere
@@ -1395,9 +1395,9 @@ Invisibility (at will)
 Regeneration: 1 hp/round
 
 Memorized Spells:
-1° Obscuring Mist, Magic Missile (x2), Shield
-2° Horror, Mirror Image
-3° Dire Charm, Slow~
+1Â° Obscuring Mist, Magic Missile (x2), Shield
+2Â° Horror, Mirror Image
+3Â° Dire Charm, Slow~
 
 @619=~Shadow Door~
 @620=~Shadow Door
@@ -1447,7 +1447,7 @@ Casting Time: 5
 Area of Effect: 30' radius
 Saving Throw: None
 
-Surges of negative energy render all hostile living creatures in the spell’s area fatigued. While fatigued, they suffers a -2 penalty to attack rolls, damage rolls, AC, casting time and movement rate. Multiple castings of this spell are not cumulative.~
+Surges of negative energy render all hostile living creatures in the spellâ€™s area fatigued, as if they haven't rested in a day. Multiple castings of this spell are cumulative.~
 
 @627=~Feeblemind~
 @628=~Feeblemind
@@ -2186,7 +2186,7 @@ Casting Time: 1
 Area of Effect: Caster
 Saving Throw: None
 
-When this spell is cast, an opaque globe of shimmering, multicolored light temporarily surrounds the caster. This magical mantle confers complete invulnerability to all weapons except for those of greater than +2 enchantment and protects the caster from attacks made within a 5' radius of the caster. Opponents that hit the caster with a weapon or spell from within this radius are subject to a random prismatic effect. Due to this spell's short casting time and duration, it is mainly used to buy the wizard a few rounds in the thick of combat.~
+When this spell is cast, an opaque globe of shimmering, multicolored light temporarily surrounds the caster. Opponents that hit the caster with a weapon or spell from within this radius are subject to a random prismatic effect. Due to this spell's short casting time and duration, it is mainly used to buy the wizard a few rounds in the thick of combat.~
 
 @735=~Simbul's Spell Sequencer~
 @736=~Simbul's Spell Sequencer
@@ -2301,11 +2301,11 @@ Special Qualities:
 Fire Resistance 100%
 
 Spell Memorized:
-1° Burning Hands, Magic Missile (x2), Shield
-2° Agannazar's Scorcher, Invisibility (x2)
-3° Fireball (x3)
-4° Fire Shield (x2)
-5° Conjure Lesser Fire Elemental~
+1Â° Burning Hands, Magic Missile (x2), Shield
+2Â° Agannazar's Scorcher, Invisibility (x2)
+3Â° Fireball (x3)
+4Â° Fire Shield (x2)
+5Â° Conjure Lesser Fire Elemental~
 
 @751=~Summon Djinni~
 @752=~Summon Djinni
@@ -2325,11 +2325,11 @@ HP 89, AC 0, THAC0 7, Saving Throws 11/7/11/7/7
 3 Attacks Per Round, 1d8+5 Slashing Damage (Scimitar +2)
 
 Spell Memorized:
-1° Magic Missile (x3), Shield
-2° Invisibility (x2), Mirror Image
-3° Haste, Lightning Bolt (x2)
-4° Improved Invisibility, Minor Globe of Invulnerability
-5° Conjure Lesser Air Elemental~
+1Â° Magic Missile (x3), Shield
+2Â° Invisibility (x2), Mirror Image
+3Â° Haste, Lightning Bolt (x2)
+4Â° Improved Invisibility, Minor Globe of Invulnerability
+5Â° Conjure Lesser Air Elemental~
 
 @753=~Summon Hakeashar~
 @754=~Summon Hakeashar
@@ -2469,11 +2469,9 @@ Casting Time: 8
 Area of Effect: 1 creature
 Saving Throw: None
 
-By means of this spell, the wizard may launch a massive attack on a target's physical and magical defenses. Pierce Shield will dispel one spell protection of any level from the target creature. This will always dispel the highest level of spell protection on the target first. If the target has two or more protections tied for the highest level, the choice will be random. After piercing through magical protections, this powerful spell will breach each and every specific or combat protection on the target creature. The target's magic resistance, if any, does not affect this spell.
+By means of this spell, the wizard may launch a massive attack on a target's physical and magical defenses. Pierce Shield will dispel one spell protection of any level from the target creature. This will always dispel the highest level of spell protection on the target first. If the target has two or more protections tied for the highest level, the choice will be random. After piercing through magical protections, this powerful spell will breach each and every combat protection on the target creature. The target's magic resistance, if any, does not affect this spell.
 
 The spell protection spells dispelled by Pierce Shield are: Minor Spell Deflection, Minor Globe of Invulnerability, Spell Deflection, Dispelling Screen, Globe of Invulnerability, Greater Spell Deflection, Shield of the Archons, Mind Blank, and Spell Trap.
-
-The specific protection spells dispelled by Pierce Shield are: Resist Fear, Resist Elements, Death Ward, Free Action, Protection from Acid, Protection from Cold, Protection from Electricity, Protection from Fire, Chaotic Commands, Protection from Magic Energy, Protection from the Elements, and Protection from Energy.
 
 The combat protection spells dispelled by Pierce Shield are: Mage Armor, Shield, Armor of Faith, Barkskin, Protection from Missiles, Spirit Armor, Stoneskin, Protection from Normal Weapons, Protection from Magical Weapons, Physical Mirror, Prismatic Mantle, and Absolute Immunity.~
 
@@ -2664,7 +2662,7 @@ Casting Time: 5
 Area of Effect: 1 creature
 Saving Throw: None
 
-When this spell is cast, it will dispel all spell protections on the target. Magic resistance does not affect this spell.
+When this spell is cast, it will dispel all spell protections on the target. In addition, affected creature will suffer from 100% spell failure rate in the first round, followed by 50% spell failure in the second round. Magic resistance does not affect this spell.
 
 The spell protection spells dispelled by Spellstrike are: Minor Spell Deflection, Non-Detection, Minor Globe of Invulnerability, Spell Deflection, Dispelling Screen, Globe of Invulnerability, Greater Spell Deflection, Shield of the Archons, Mind Blank, and Spell Trap.~
 
@@ -2787,7 +2785,7 @@ Casting Time: 1 round
 Area of Effect: 30' radius
 Saving Throw: Death negates
 
-At the culmination of this dreadful spell, the wizard screams like a banshee (groaning spirit). Everyone in the area of effect hears the awful cry. Enemies who fail a saving throw vs. death at -2 die instantly. The caster and his companions are immune to the effects of the wail.~
+At the culmination of this dreadful spell, the wizard screams like a banshee (groaning spirit). Everyone in the area of effect hears the awful cry. Enemies who fail a saving throw vs. death at -2 die instantly, and those surviving the wail are deafened for 2 rounds. The caster and his companions are immune to the effects of the wail.~
 
 @831=~Larloch's Energy Drain~
 @832=~Larloch's Energy Drain
@@ -2961,13 +2959,13 @@ Cold & Electrical Resistance 100%; Fire Resistance 50%; Magic Resistance 75%
 Slashing, Crushing, Piercing, & Missile Resistance 20%
 
 Known Spells:
-1° Bless (x3), Resist Fear (x3)
-2° Aid (x3), Find Trap, Know Opponent, Draw upon Divine Might
-3° Cure Disease (x2), Holy Smite (x2), Break Enchantment (x2)
-4° Cure Critical Wounds (x2), Death Ward (x2), Neutralize Poison (x2), Magic Circle against Evil (x2)
-5° Chaotic Commands (x2), Raise Dead (x2), True Seeing (x2)
-6° Blade Barrier, Bolt of Glory, Heal
-7° Greater Restoration, Holy Word~
+1Â° Bless (x3), Resist Fear (x3)
+2Â° Aid (x3), Find Trap, Know Opponent, Draw upon Divine Might
+3Â° Cure Disease (x2), Holy Smite (x2), Break Enchantment (x2)
+4Â° Cure Critical Wounds (x2), Death Ward (x2), Neutralize Poison (x2), Magic Circle against Evil (x2)
+5Â° Chaotic Commands (x2), Raise Dead (x2), True Seeing (x2)
+6Â° Blade Barrier, Bolt of Glory, Heal
+7Â° Greater Restoration, Holy Word~
 
 @859=~Summon Dark Planetar~
 @860=~Summon Dark Planetar
@@ -2996,13 +2994,13 @@ Fire & Electrical Resistance 100%; Acid Resistance 50%; Magic Resistance 75%
 Slashing, Crushing, Piercing, & Missile Resistance 20%
 
 Known Spells:
-1° Doom (x3), Resist Fear (x3)
-2° Hold Person (x3), Find Trap, Know Opponent, Silence
-3° Contagion (x2), Unholy Blight (x2), Break Enchantment (x2)
-4° Cause Critical Wounds (x2), Mental Domination (x2), Poison (x2), Cloak of Fear (x2)
-5° Flame Strike (x2), Greater Command (x2), True Seeing (x2)
-6° Blade Barrier, Dolorous Decay, Harm
-7° Fire Storm, Unholy Word~
+1Â° Doom (x3), Resist Fear (x3)
+2Â° Hold Person (x3), Find Trap, Know Opponent, Silence
+3Â° Contagion (x2), Unholy Blight (x2), Break Enchantment (x2)
+4Â° Cause Critical Wounds (x2), Mental Domination (x2), Poison (x2), Cloak of Fear (x2)
+5Â° Flame Strike (x2), Greater Command (x2), True Seeing (x2)
+6Â° Blade Barrier, Dolorous Decay, Harm
+7Â° Fire Storm, Unholy Word~
 
 @861=~Comet~
 @862=~Comet

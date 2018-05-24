@@ -4,7 +4,7 @@ README ~spell_rev\readme-spell_rev.html~
 //MODDER
 ASK_EVERY_COMPONENT
 
-VERSION ~v4 Beta 14~
+VERSION ~v4 Beta 15.1~
 
 ALWAYS
   OUTER_PATCH ~~ BEGIN
@@ -67,7 +67,7 @@ LANGUAGE ~Polish by dradiel (djc@poczta.fm)~
 
 BEGIN @9996
 DESIGNATED 0
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob bgee bg2ee~) @8996 // ~This mod is designed for the Baldur's Gate II engine and will not function on other games.~
+REQUIRE_PREDICATE (ENGINE_IS ~soa tob bgee bg2ee iwdee~) @8996 // ~This mod is designed for the Baldur's Gate II engine and will not function on other games.~
 
 // ToBEx
 ACTION_IF install_tobex && (ENGINE_IS ~tob~) BEGIN
@@ -124,7 +124,7 @@ INCLUDE ~spell_rev/components/celestials.tpa~
 
 BEGIN @9992
 DESIGNATED 20
-REQUIRE_PREDICATE (ENGINE_IS ~soa tob bgee bg2ee~) @8996 // ~This mod is designed for the Baldur's Gate II engine and will not function on other games.~
+REQUIRE_PREDICATE (ENGINE_IS ~soa tob bgee bg2ee iwdee~) @8996 // ~This mod is designed for the Baldur's Gate II engine and will not function on other games.~
 
 INCLUDE ~spell_rev/components/mirror_image_vs_aoe.tpa~
 
@@ -216,6 +216,12 @@ PRINT @7999 // ~Patching spellbooks of joinable NPCs, this may take a moment...~
 
 // remove old spells, add new ones
 INCLUDE ~spell_rev/components/fix_spellbooks.tpa~
+
+/*--------Revised HLAs----------------*/
+BEGIN @10000
+DESIGNATED 65
+REQUIRE_PREDICATE (ENGINE_IS ~soa tob bg2ee eet~) @8996 // ~This mod is designed for the Baldur's Gate II engine and will not function on other games.~
+INCLUDE ~spell_rev/lib/kreso_hla.tph~
 
 PRINT @7998 // ~Done!~
 
