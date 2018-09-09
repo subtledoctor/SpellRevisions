@@ -52,6 +52,8 @@ COPY ~spell_rev\shared\dvwinded.spl~      ~override~  // Fatigue Effect
 COPY ~spell_rev\shared\dvbanish.eff~     ~override~ // Banish EFFs
 COPY ~spell_rev\shared\dvbanish.spl~     ~override~
 
+COPY ~spell_rev\shared\d5dvsl30.spl~      ~override~  // 30-sec Slow subspell
+
 COPY ~spell_rev\shared\dvpowerw.eff~     ~override~ // Power Words vvc
 
 COPY ~spell_rev\shared\dvelair.vvc~     ~override~ // Conjure Air Elemental new animation
@@ -658,6 +660,9 @@ COPY ~spell_rev\sppr4##\dvspratt.spl~     ~override~ // Spring Attack (Pounce)
 
 COPY ~spell_rev\sppr4##\sppr403.spl~     ~override~  // Free Action
   SAY NAME1 @115    SAY UNIDENTIFIED_DESC @116
+  PATCH_IF NOT FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+	LPF DELETE_EFFECT INT_VAR match_opcode = 328 END
+  END
 COPY ~spell_rev\sppr4##\scrl58.itm~     ~override~
   SAY NAME2 @115    SAY IDENTIFIED_DESC   @116
 
@@ -1766,6 +1771,9 @@ COPY ~spell_rev\spwi4##\scrl1y.itm~     ~override~
 
 COPY ~spell_rev\spwi4##\spwi406.spl~     ~override~  // Minor Globe of Invulnerability
   SAY NAME1 @571    SAY UNIDENTIFIED_DESC @572
+  PATCH_IF NOT FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+	LPF DELETE_EFFECT INT_VAR match_opcode = 328 END
+  END
 COPY ~spell_rev\spwi4##\scrl1z.itm~     ~override~
   SAY NAME2 @571    SAY IDENTIFIED_DESC   @572
 
@@ -2135,6 +2143,9 @@ COPY ~spell_rev\spwi6##\stalkesu.itm~     ~override~
 
 COPY ~spell_rev\spwi6##\spwi602.spl~     ~override~  // Globe of Invulnerability
   SAY NAME1 @663    SAY UNIDENTIFIED_DESC @664
+  PATCH_IF NOT FILE_EXISTS_IN_GAME ~enginest.2da~ BEGIN
+	LPF DELETE_EFFECT INT_VAR match_opcode = 328 END
+  END
 COPY ~spell_rev\spwi6##\scrl7f.itm~     ~override~
   SAY NAME2 @663    SAY IDENTIFIED_DESC   @664
 
