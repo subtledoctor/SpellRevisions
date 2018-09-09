@@ -523,8 +523,9 @@ COPY ~spell_rev\sppr3##\skelwasu.itm~     ~override~
 COPY ~spell_rev\sppr3##\sppr302.spl~     ~override~  // Call Lightning
   SAY NAME1 @73    SAY UNIDENTIFIED_DESC @74
 
-COPY ~spell_rev\sppr3##\sppr303.spl~     ~override~  // Dispel Magic
+COPY ~spell_rev\spwi3##\spwi302.spl~     ~override\sppr303.spl~  // Dispel Magic = Remove Magic
   SAY NAME1 @75    SAY UNIDENTIFIED_DESC @76
+  WRITE_SHORT 0x1c 2
 
 COPY ~spell_rev\sppr3##\sppr304.spl~     ~override~  // Glyph of Warding
   SAY NAME1 @77    SAY UNIDENTIFIED_DESC @78
@@ -588,6 +589,14 @@ COPY ~spell_rev\sppr4##\scrl56.itm~     ~override~
 COPY ~spell_rev\sppr3##\sppr317.spl~     ~override~  // Cure Disease
   SAY NAME1 @99    SAY UNIDENTIFIED_DESC @100
 
+ACTION_IF NOT GAME_IS ~iwdee~ BEGIN
+ COPY ~spell_rev\sppr2##\sppr218.spl~     ~override\sppr318.spl~  // Gust of Wind (new druid spell)
+  SAY NAME1 @313    SAY UNIDENTIFIED_DESC @314
+  READ_BYTE 0x21 priest_type
+  WRITE_BYTE 0x21 (%priest_type% BOR 0b10000000) 						// make unusable by druids
+  WRITE_BYTE 0x21 (%priest_type% BAND 0b10111111) 						// make usable by clerics
+
+END
 COPY ~spell_rev\sppr3##\sppr318.spl~     ~override~  // Gust of Wind (replaces Zone of Sweet Air)
   SAY NAME1 @101    SAY UNIDENTIFIED_DESC @102
 /* STRING_SET ~45247~ @3101 // change Load Game/Change Area string reference */
@@ -641,6 +650,8 @@ COPY ~spell_rev\sppr3##\sppr326.spl~     ~override~  // Icelance (new druid spel
   SAY NAME1 @335    SAY UNIDENTIFIED_DESC @336
   WRITE_SHORT 0x98 %dvicespr%
 COPY ~spell_rev\sppr3##\icelance.bam~     ~override~
+COPY ~spell_rev\sppr3##\icelancc.bam~     ~override~
+COPY ~spell_rev\sppr3##\icelancb.bam~     ~override~
 COPY ~spell_rev\sppr3##\dvicespr.wav~     ~override~
 
 /*-----------------------level 4-----------------------*/
@@ -1305,8 +1316,17 @@ COPY ~spell_rev\spwi1##\chromorb.pro~     ~override~
 
 COPY ~spell_rev\spwi1##\spwi119.spl~     ~override~  // Larloch's Minor Drain
   SAY NAME1 @435    SAY UNIDENTIFIED_DESC @436
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 4 parameter2 = 3 timing = 0 duration = 1 STR_VAR resource = ~d5dvw119~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 7 parameter2 = 7 timing = 0 duration = 1 STR_VAR resource = ~d5dvw119~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 144 parameter2 = 4 timing = 0 duration = 1 STR_VAR resource = ~d5dvw119~ END
 COPY ~spell_rev\spwi1##\scrl84.itm~     ~override~
   SAY NAME2 @435    SAY IDENTIFIED_DESC   @436
+CREATE EFF ~d5dvw119~
+	WRITE_LONG 0x10 206
+	WRITE_LONG 0x14 2
+	WRITE_LONG 0x24 0
+	WRITE_LONG 0x28 1
+	WRITE_ASCII 0x30 ~spwi119~ #8
 
 COPY ~spell_rev\spwi1##\spwi120.spl~     ~override~  // Reflected Image
   SAY NAME1 @437    SAY UNIDENTIFIED_DESC @438
@@ -1666,8 +1686,17 @@ COPY ~spell_rev\spwi3##\spwi313i.eff~     ~override~
 
 COPY ~spell_rev\spwi3##\spwi314.spl~     ~override~  // Vampiric Touch
   SAY NAME1 @527    SAY UNIDENTIFIED_DESC @528
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 4 parameter2 = 3 timing = 0 duration = 1 STR_VAR resource = ~d5dvw314~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 7 parameter2 = 7 timing = 0 duration = 1 STR_VAR resource = ~d5dvw314~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 144 parameter2 = 4 timing = 0 duration = 1 STR_VAR resource = ~d5dvw314~ END
 COPY ~spell_rev\spwi3##\scrl1q.itm~     ~override~
   SAY NAME2 @527    SAY IDENTIFIED_DESC   @528
+CREATE EFF ~d5dvw314~
+	WRITE_LONG 0x10 206
+	WRITE_LONG 0x14 2
+	WRITE_LONG 0x24 0
+	WRITE_LONG 0x28 1
+	WRITE_ASCII 0x30 ~spwi314~ #8
 
 COPY ~spell_rev\spwi3##\spwi316.spl~     ~override~  // Dire Charm
   SAY NAME1 @529    SAY UNIDENTIFIED_DESC @530
@@ -1722,10 +1751,9 @@ COPY ~spell_rev\spwi3##\scrla5.itm~     ~override~
   SAY NAME2 @545    SAY IDENTIFIED_DESC   @546
 COPY ~spell_rev\spwi3##\melfmet.itm~     ~override~
 
-COPY ~spell_rev\spwi3##\spwi326.spl~     ~override~  // Dispel Magic
+COPY ~spell_rev\spwi3##\spwi326.spl~     ~override~  // Dispel Magic: 
   SAY NAME1 @547    SAY UNIDENTIFIED_DESC @548
-COPY ~spell_rev\spwi3##\scrl1e.itm~     ~override~
-  SAY NAME2 @547    SAY IDENTIFIED_DESC   @548
+COPY_EXISTING ~override\scrla7.itm~     ~override/scrl1e.itm~
 
 COPY ~spell_rev\spwi3##\spwi327.spl~     ~override~  // Icelance (added by V4)
   SAY NAME1 @875    SAY UNIDENTIFIED_DESC @876
@@ -1857,6 +1885,13 @@ COPY ~spell_rev\spwi4##\enchwp~     ~override~
 
 COPY ~spell_rev\spwi4##\spwi418.spl~     ~override~  // Fire Shield (Red)
   SAY NAME1 @595    SAY UNIDENTIFIED_DESC @596
+// add immunities to insect spells
+  LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 30 opcode = 206 parameter1 = 0 STR_VAR resource = ~sppr319a~ END
+  LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 30 opcode = 206 parameter1 = 0 STR_VAR resource = ~sppr319b~ END
+  LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 30 opcode = 206 parameter1 = 0 STR_VAR resource = ~sppr517a~ END
+  LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 30 opcode = 206 parameter1 = 0 STR_VAR resource = ~sppr517b~ END
+  LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 30 opcode = 206 parameter1 = 0 STR_VAR resource = ~sppr717a~ END
+  LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 30 opcode = 206 parameter1 = 0 STR_VAR resource = ~sppr717b~ END
 COPY ~spell_rev\spwi4##\scrl6n.itm~     ~override~
   SAY NAME2 @595    SAY IDENTIFIED_DESC   @596
 COPY ~spell_rev\spwi4##\spwi418a.spl~     ~override~
@@ -2618,6 +2653,7 @@ COPY ~spell_rev\spwi9##\dempitsu.cre~     ~override~
 COPY ~spell_rev\spwi9##\dempitsu.itm~     ~override~
 COPY ~spell_rev\spwi9##\dvpitsu.bcs~     ~override~
 
+/*
 COPY ~spell_rev\spwi9##\spwi906.spl~     ~override~  // Monster Summoning VIII
   SAY NAME1 @870    SAY UNIDENTIFIED_DESC @871
 COPY ~spell_rev\spwi9##\scrl9n.itm~     ~override~  // replace Gate scroll
@@ -2628,6 +2664,7 @@ COPY ~spell_rev\spwi9##\basilgsu.bcs~     ~override~
 COPY ~spell_rev\spwi9##\basilg1.itm~     ~override~
 COPY ~spell_rev\spwi9##\basilg2.itm~     ~override~
 COPY ~spell_rev\spwi9##\basilg3.itm~     ~override~
+*/
 
 COPY ~spell_rev\spwi9##\spwi907.spl~     ~override~  // Absolute Immunity
   SAY NAME1 @817    SAY UNIDENTIFIED_DESC @818
@@ -2669,9 +2706,18 @@ COPY ~spell_rev\spwi9##\scrl9v.itm~     ~override~
 
 COPY ~spell_rev\spwi9##\spwi914.spl~     ~override~  // Energy Drain
   SAY NAME1 @831    SAY UNIDENTIFIED_DESC @832
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 4 parameter2 = 3 timing = 0 duration = 1 STR_VAR resource = ~d5dvw914~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 7 parameter2 = 7 timing = 0 duration = 1 STR_VAR resource = ~d5dvw914~ END
+  LPF ADD_SPELL_EFFECT INT_VAR insert_point = 0 opcode = 177 target = 2 parameter1 = 144 parameter2 = 4 timing = 0 duration = 1 STR_VAR resource = ~d5dvw914~ END
 COPY ~spell_rev\spwi9##\scrl9w.itm~     ~override~
   SAY NAME2 @831    SAY IDENTIFIED_DESC   @832
 COPY ~spell_rev\spwi9##\dvenerdr.eff~     ~override~
+CREATE EFF ~d5dvw914~
+	WRITE_LONG 0x10 206
+	WRITE_LONG 0x14 2
+	WRITE_LONG 0x24 0
+	WRITE_LONG 0x28 1
+	WRITE_ASCII 0x30 ~spwi914~ #8
 
 COPY ~spell_rev\spwi9##\spwi915.spl~     ~override~  // Black Blade of Disaster
   SAY NAME1 @833    SAY UNIDENTIFIED_DESC @834
