@@ -1,2 +1,7 @@
 FILE           OPCODE  PAR_1 PAR_2 CLONE  TICK  PATCH_WHAT //  DESCRIPTION
-
+sppr319a.SPL    233     1     120   146    6     A
+sppr517a.SPL    233     2     120   146    6     A
+sppr717a.SPL    233     3     120   146    6     A
+spwi310.SPL    282     3     6     142    n     A
+SPWI522.SPL    233     1     116   201    n     A
+spwi701.SPL    233     2     116   201    n     A
