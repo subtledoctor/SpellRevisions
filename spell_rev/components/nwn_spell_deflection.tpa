@@ -1,4 +1,7 @@
 
+// TO DO: 
+// - separate methods for handling AoE subspells (diff renaming mechanism)
+
 ACTION_CLEAR_ARRAY spell
 
 ACTION_DEFINE_ASSOCIATIVE_ARRAY spell BEGIN

@@ -45,8 +45,6 @@ END
 BUT_ONLY
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
- SNPRINT 3 ~spl_prefix~ ~%SOURCE_RES%~
- PATCH_IF NOT (~%spl_prefix%~ STRING_EQUAL_CASE ~#bo~) BEGIN
   PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
     SET found_haste=0
     READ_LONG 0x64 ab_off
@@ -66,12 +64,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
       END
 	END
   END
- END
 BUT_ONLY
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
- SNPRINT 3 ~spl_prefix~ ~%SOURCE_RES%~
- PATCH_IF NOT (~%spl_prefix%~ STRING_EQUAL_CASE ~#bo~) BEGIN
   PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
     SET found_slow=0
     READ_LONG 0x64 ab_off
@@ -91,7 +86,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
       END
 	END
   END
- END
 BUT_ONLY
  
 COPY_EXISTING_REGEXP GLOB ~.*\.itm$~ ~override~
@@ -106,21 +100,15 @@ LPF CLONE_EFFECT INT_VAR match_opcode = 16 opcode = 221 parameter1 = 9 parameter
 END
 BUT_ONLY
 
- COPY_EXISTING_REGEXP GLOB ~.*\.spl$~ ~override~
- SNPRINT 3 ~spl_prefix~ ~%SOURCE_RES%~
- PATCH_IF NOT (~%spl_prefix%~ STRING_EQUAL_CASE ~#bo~) BEGIN
+COPY_EXISTING_REGEXP GLOB ~.*\.spl$~ ~override~
  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
  LPF CLONE_EFFECT INT_VAR match_opcode = 16 opcode = 221 parameter1 = 9 parameter2 = %k1#Slow% savingthrow = 0 silent = 1 END
  END
- END
  BUT_ONLY
  
- COPY_EXISTING_REGEXP GLOB ~.*\.spl$~ ~override~
- SNPRINT 3 ~spl_prefix~ ~%SOURCE_RES%~
- PATCH_IF NOT (~%spl_prefix%~ STRING_EQUAL_CASE ~#bo~) BEGIN
+COPY_EXISTING_REGEXP GLOB ~.*\.spl$~ ~override~
  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
  LPF CLONE_EFFECT INT_VAR match_opcode = 40 opcode = 221 parameter1 = 9 parameter2 = %k1#Haste% savingthrow = 0 silent = 1 END
- END
  END
  BUT_ONLY
   
@@ -157,6 +145,24 @@ BUT_ONLY
 	insert_point    = 1
     END
   BUT_ONLY 
+
+ACTION_IF  FILE_EXISTS_IN_GAME ~spin828.spl~ BEGIN
+  COPY_EXISTING ~spin828.spl~ ~override~    // stalker Haste
+  WRITE_BYTE 0x27 "%k1#Haste%"  
+  LPF DELETE_SPELL_EFFECT INT_VAR opcode_to_delete = 221 END
+  LPF ADD_SPELL_EFFECT
+	INT_VAR
+	opcode			= 221
+	target			= 1
+	power			= 0
+	savingthrow     = 0
+	parameter1		= 9
+	parameter2		= EVALUATE_BUFFER %k1#Slow%
+	timing			= 1
+	insert_point    = 1
+    END
+  BUT_ONLY 
+END
   
 ACTION_IF  FILE_EXISTS_IN_GAME ~potn14.spl~ BEGIN // IR Oil of Speed - commented out for now, shouldn't remove slow
 COPY_EXISTING ~potn14.spl~ ~override~  

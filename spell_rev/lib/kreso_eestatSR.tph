@@ -4108,8 +4108,6 @@ spwi223 - sound burst (deaf) irrelevant */
  ////POISON & FEAR spl///
  
  COPY_EXISTING_REGEXP GLOB ~.*\.spl~ ~override~
- SNPRINT 3 ~spl_prefix~ ~%SOURCE_RES%~
- PATCH_IF NOT (~%spl_prefix%~ STRING_EQUAL_CASE ~#bo~) BEGIN
  LPF CLONE_EFFECT 
  INT_VAR 
  match_opcode = 101
@@ -4119,12 +4117,9 @@ spwi223 - sound burst (deaf) irrelevant */
  special = 1
  silent = 1
  END 
- END
  BUT_ONLY_IF_IT_CHANGES
  
 COPY_EXISTING_REGEXP GLOB ~.*\.spl~ ~override~
- SNPRINT 3 ~spl_prefix~ ~%SOURCE_RES%~
- PATCH_IF NOT (~%spl_prefix%~ STRING_EQUAL_CASE ~#bo~) BEGIN
  LPF CLONE_EFFECT 
  INT_VAR 
  match_opcode = 101
@@ -4132,7 +4127,6 @@ COPY_EXISTING_REGEXP GLOB ~.*\.spl~ ~override~
  opcode = 173
  parameter1 = 100
  silent = 1
- END
  END
  BUT_ONLY_IF_IT_CHANGES 
  

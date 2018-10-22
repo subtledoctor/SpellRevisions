@@ -2,7 +2,25 @@ INCLUDE ~spell_rev\lib\cre_spell_immunity.tph~
 
 ////////////////////////////////////////////////////
 
+/*
+ TO DO:
+
+-- go over all protection spells that are not supposed to be cumulative with themselves and corrected a number of spells that had them not in quite the correct order: various Protections Against Evils, Mage Armor, Ghost Armor, Barkskin, Resist Elements, Storm Shield, Magic Resistance, and Regeneration. Most of these, with the exception of I think Storm Shield, were only very slightly out of order, mostly because of other versions of the spell across the arcane-divine spectrum or vs. IR copies of the spells (i.e. the divine version of Resist Elements was specifying protection against the divine version of the spell before the arcane version, which prevented the protection against the arcane version from ever happening...so you could cast the arcane version right after and stack them, but not the other way around). Storm Shield had its protection against itself inserted right in the middle of spell, and so was lacking its protections against gas spells like Cloudkill as a result.
+-- check mass regen targeting 
+
+*/
+
 /* ----Various---- */
+
+// SD: eliminate #bonecir.spl from IWDEE
+ACTION_IF GAME_IS ~iwdee~ BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME "#bonecir.spl" BEGIN
+	DISABLE_FROM_KEY "#bonecir.spl"
+  END
+  ACTION_IF FILE_EXISTS "override/#bonecir.spl" BEGIN
+	DELETE "override/#bonecir.spl"
+  END
+END
 
 // Scroll Of Restoration: no longer needed since addition of spellbook fixing code in v3
 // adscroll.itm still copied over in case someone wants to CLUAConsole it for use on an old save game
@@ -177,12 +195,54 @@ COPY ~spell_rev\shared\vermtype.itm~     ~override~  // Vermin type characterist
 
 /* ----Bhaalspawn Abilities---- */
 
-COPY ~spell_rev\shared\spin101.spl~     ~override~ // Cure Light Wounds
-COPY ~spell_rev\shared\spin102.spl~     ~override~ // Slow Poison
-COPY ~spell_rev\shared\spin103.spl~     ~override~ // Draw upon Divine Might
-COPY ~spell_rev\shared\spin104.spl~     ~override~ // Larloch's Minor Drain
-COPY ~spell_rev\shared\spin105.spl~     ~override~ // Horror
-COPY ~spell_rev\shared\spin106.spl~     ~override~ // Vampiric Drain
+ACTION_IF FILE_EXISTS_IN_GAME ~spin101.spl~ BEGIN
+  COPY_EXISTING ~spin101.spl~ ~override~
+	READ_LONG 0x8 spl_name
+	READ_LONG 0x50 spl_desc
+  COPY ~spell_rev\shared\spin101.spl~     ~override~ // Cure Light Wounds
+	WRITE_LONG 0x8 spl_name
+	WRITE_LONG 0x50 spl_desc
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~spin102.spl~ BEGIN
+  COPY_EXISTING ~spin102.spl~ ~override~
+	READ_LONG 0x8 spl_name
+	READ_LONG 0x50 spl_desc
+  COPY ~spell_rev\shared\spin102.spl~     ~override~ // Slow Poison
+	WRITE_LONG 0x8 spl_name
+	WRITE_LONG 0x50 spl_desc
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~spin103.spl~ BEGIN
+  COPY_EXISTING ~spin103.spl~ ~override~
+	READ_LONG 0x8 spl_name
+	READ_LONG 0x50 spl_desc
+  COPY ~spell_rev\shared\spin103.spl~     ~override~ // Draw upon Divine Might
+	WRITE_LONG 0x8 spl_name
+	WRITE_LONG 0x50 spl_desc
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~spin104.spl~ BEGIN
+  COPY_EXISTING ~spin104.spl~ ~override~
+	READ_LONG 0x8 spl_name
+	READ_LONG 0x50 spl_desc
+  COPY ~spell_rev\shared\spin104.spl~     ~override~ // Larloch's Minor Drain
+	WRITE_LONG 0x8 spl_name
+	WRITE_LONG 0x50 spl_desc
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~spin105.spl~ BEGIN
+  COPY_EXISTING ~spin105.spl~ ~override~
+	READ_LONG 0x8 spl_name
+	READ_LONG 0x50 spl_desc
+  COPY ~spell_rev\shared\spin105.spl~     ~override~ // Horror
+	WRITE_LONG 0x8 spl_name
+	WRITE_LONG 0x50 spl_desc
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~spin106.spl~ BEGIN
+  COPY_EXISTING ~spin106.spl~ ~override~
+	READ_LONG 0x8 spl_name
+	READ_LONG 0x50 spl_desc
+  COPY ~spell_rev\shared\spin106.spl~     ~override~ // Vampiric Drain
+	WRITE_LONG 0x8 spl_name
+	WRITE_LONG 0x50 spl_desc
+END
 
 /* ----Avenger Abilities---- */
 
@@ -219,7 +279,14 @@ COPY ~spell_rev\shared\spra303.spl~     ~override~ // Protection from Missiles
 
 /* ----Paladin Abilities---- */
 
-COPY ~spell_rev\shared\spcl213.spl~     ~override~ // Protection from Evil
+ACTION_IF FILE_EXISTS_IN_GAME ~spcl213.spl~ BEGIN
+  COPY_EXISTING ~spcl213.spl~ ~override~
+	READ_LONG 0x8 spl_name
+	READ_LONG 0x50 spl_desc
+  COPY ~spell_rev\shared\spcl213.spl~     ~override~ // Protection from Evil
+	WRITE_LONG 0x8 spl_name
+	WRITE_LONG 0x50 spl_desc
+END
 
 /* ----Stormlord Abilities---- */
 
@@ -238,7 +305,14 @@ COPY ~spell_rev\shared\dvgasfrm.spl~      ~override~ // Gaseous Form
 COPY ~spell_rev\shared\dvgasfrm.itm~      ~override~ // Gaseous Form
 COPY ~spell_rev\shared\dvtelpor.spl~      ~override~ // Teleport Without Error
 
-COPY ~spell_rev\shared\spin113.spl~      ~override~ // Branwen Spiritual Hammer
+ACTION_IF FILE_EXISTS_IN_GAME ~spin113.spl~ BEGIN
+  COPY_EXISTING ~spin113.spl~ ~override~
+	READ_LONG 0x8 spl_name
+	READ_LONG 0x50 spl_desc
+  COPY ~spell_rev\shared\spin113.spl~      ~override~ // Branwen Spiritual Hammer
+	WRITE_LONG 0x8 spl_name
+	WRITE_LONG 0x50 spl_desc
+END
 
 COPY ~spell_rev\shared\spin683.spl~      ~override~ // Innate Web Tangle
 COPY ~spell_rev\shared\spin701.spl~      ~override~ // Death Knight's Unholy Fireball
@@ -1915,7 +1989,7 @@ COPY ~spell_rev\spwi4##\spwi420.spl~     ~override~  // Simbul's Spell Matrix (p
 COPY ~spell_rev\spwi4##\scrl6p.itm~     ~override~
   SAY NAME2 @599    SAY IDENTIFIED_DESC   @600
 COPY ~spell_rev\spwi4##\spwi420d.spl~     ~override~
-  SAY NAME2 @599
+  SAY NAME1 @599
 
 COPY ~spell_rev\spwi4##\spwi421.spl~     ~override~  // Teleport Field
   SAY NAME1 @601    SAY UNIDENTIFIED_DESC @602
@@ -2965,6 +3039,19 @@ COPY ~spell_rev/revised_saves/savewiz.2da~ ~override~  // Wizard saves
 
 COPY ~spell_rev/revised_saves/savecndh.2da~ ~override~  // Dwarf/Halfling save bonuses
 COPY ~spell_rev/revised_saves/savecng.2da~ ~override~  // Gnome save bonuses
+
+//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\\\
+////\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
+
+// added by SubtleDoctor:
+
+/*------ SET ARCANE SPELL SCHOOLS ------*/
+
+// and mark arcane spells for spellbook removal 
+
+INCLUDE ~spell_rev/lib/d5_spell_school_list.tpa~
+INCLUDE ~spell_rev/lib/d5_set_spell_schools.tpa~
+LAF set_spell_schools END
 
 //\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\\\
 ////\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\

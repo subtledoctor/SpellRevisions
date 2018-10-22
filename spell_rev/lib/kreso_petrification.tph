@@ -32,8 +32,6 @@ BUT_ONLY
 
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
- SNPRINT 3 ~spl_prefix~ ~%SOURCE_RES%~
- PATCH_IF NOT (~%spl_prefix%~ STRING_EQUAL_CASE ~#bo~) BEGIN
   PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
     SET found_petrify=0
     READ_LONG 0x64 ab_off
@@ -58,7 +56,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
 	  END
 	END
   END
- END
 BUT_ONLY 
  
 
@@ -71,11 +68,8 @@ COPY_EXISTING_REGEXP GLOB ~.*\.itm$~ ~override~
 BUT_ONLY
 
 COPY_EXISTING_REGEXP GLOB ~.*\.spl$~ ~override~
-  SNPRINT 3 ~spl_prefix~ ~%SOURCE_RES%~
-  PATCH_IF NOT (~%spl_prefix%~ STRING_EQUAL_CASE ~#bo~) BEGIN
-	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
-	  LPF CLONE_EFFECT INT_VAR match_opcode = 43 opcode = 221  parameter2 = %k1#Petrify% silent = 1 END
-	END
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+	LPF CLONE_EFFECT INT_VAR match_opcode = 43 opcode = 221  parameter2 = %k1#Petrify% silent = 1 END
   END
 BUT_ONLY
  
@@ -99,13 +93,10 @@ COPY_EXISTING_REGEXP GLOB ~.*\.itm$~ ~override~
 BUT_ONLY 
 
 COPY_EXISTING_REGEXP GLOB ~.*\.spl$~ ~override~
-  SNPRINT 3 ~spl_prefix~ ~%SOURCE_RES%~
-  PATCH_IF NOT (~%spl_prefix%~ STRING_EQUAL_CASE ~#bo~) BEGIN
-	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
-	  LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 101 opcode = 206 match_parameter2 = 134  STR_VAR resource = spwi604d silent = 1 END 
-	  LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 101 opcode = 206 match_parameter2 = 134  STR_VAR resource = spwi604  silent = 1 END
-	  LPF DELETE_SPELL_EFFECT INT_VAR opcode_to_delete = 134 END 
-	END
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 101 opcode = 206 match_parameter2 = 134  STR_VAR resource = spwi604d silent = 1 END 
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 101 opcode = 206 match_parameter2 = 134  STR_VAR resource = spwi604  silent = 1 END
+	LPF DELETE_SPELL_EFFECT INT_VAR opcode_to_delete = 134 END 
   END
 BUT_ONLY 
 
@@ -117,11 +108,8 @@ COPY_EXISTING_REGEXP GLOB ~.*\.itm$~ ~override~
 BUT_ONLY 
 
 COPY_EXISTING_REGEXP GLOB ~.*\.spl$~ ~override~
-  SNPRINT 3 ~spl_prefix~ ~%SOURCE_RES%~
-  PATCH_IF NOT (~%spl_prefix%~ STRING_EQUAL_CASE ~#bo~) BEGIN
-	PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
-	  LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 83 opcode = 206 match_parameter2 = 64  STR_VAR resource = spwi604d silent = 1 END  
-	  LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 83 opcode = 206 match_parameter2 = 64  STR_VAR resource = spwi604  silent = 1 END 
-	END
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 83 opcode = 206 match_parameter2 = 64  STR_VAR resource = spwi604d silent = 1 END  
+	LPF CLONE_EFFECT INT_VAR multi_match = 1 match_opcode = 83 opcode = 206 match_parameter2 = 64  STR_VAR resource = spwi604  silent = 1 END 
   END
 BUT_ONLY
